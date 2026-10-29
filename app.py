@@ -65,8 +65,9 @@ if st.button("🚀 ابدأ توليد السيناريو والرسومات"):
                 }}
                 """
                 
+                # استخدام نموذج gemini-2.5-flash لضمان الاستقرار والسرعة العالية وتجنب أخطاء الضغط
                 response = client.models.generate_content(
-                    model="gemini-3.8-flash",
+                    model="gemini-2.5-flash",
                     contents=prompt,
                 )
                 
