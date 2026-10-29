@@ -52,7 +52,7 @@ if st.button("🚀 ابدأ توليد السيناريو والرسومات ع�
                 الفئة المستهدفة: {audience_input}.
                 عدد المشاهد المطلوبة: {scenes_count}.
                 
-                أجب بصيغة JSON متوافقة حصرياً مع هذا الهيكل ودون أي نصوص إضافية أو مقدمات:
+                أجب بصيغة JSON متوافقة حصرياً مع هذا الهيكل ودون أي نصوص إضافية أو مقدمات (فقط الكود كـ JSON):
                 {{
                     "project_title": "عنوان القصة",
                     "scenes": [
@@ -65,18 +65,23 @@ if st.button("🚀 ابدأ توليد السيناريو والرسومات ع�
                 }}
                 """
                 
-                # استخدام النموذج الأحدث والمدعوم رسمياً llama-3.3-70b-versatile
+                # استخدام النموذج المعتمد والمتاح لجميع مفاتيح Groq المجانية
                 completion = client.chat.completions.create(
-                    model="llama-3.3-70b-versatile",
+                    model="llama-3.1-8b-instant",
                     messages=[
-                        {"role": "system", "content": "You are a JSON generator assistant. Output strictly valid JSON."},
+                        {"role": "system", "content": "You are a helpful assistant that outputs strictly JSON."},
                         {"role": "user", "content": prompt}
                     ],
-                    response_format={"type": "json_object"}
+                    temperature=0.7
                 )
                 
                 raw_text = completion.choices[0].message.content.strip()
-                story_data = json.loads(raw_text)
+                if raw_text.startswith("```json"):
+                    raw_text = raw_text[7:]
+                if raw_text.endswith("```"):
+                    raw_text = raw_text[:-3]
+                    
+                story_data = json.loads(raw_text.strip())
                 
                 os.makedirs("outputs", exist_ok=True)
                 with open("outputs/story_output.json", "w", encoding="utf-8") as f:
