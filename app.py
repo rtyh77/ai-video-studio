@@ -42,7 +42,7 @@ if st.button("🚀 ابدأ توليد السيناريو والمشاهد"):
             # عرض النتائج على شكل بطاقات مرتبة في الموقع
             st.subheader("📜 تفاصيل المشاهد المولدة:")
             for scene in story_data["scenes"]:
-                with st.exparker(f"المشهد {scene['scene_number']}") if hasattr(st, 'expander') else st.container():
+                with st.expander(f"المشهد {scene['scene_number']}"):
                     st.write(f"**الراوي:** {scene['narrator_text']}")
                     st.code(f"Prompt: {scene['visual_prompt']}", language="text")
 
