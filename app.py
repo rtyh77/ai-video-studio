@@ -65,9 +65,9 @@ if st.button("🚀 ابدأ توليد السيناريو والرسومات ع�
                 }}
                 """
                 
-                # استخدام النموذج الافتراضي الأكثر ضماناً وتوافقاً مع مفاتيح Groq الجديدة
+                # استخدام النموذج النشط والحديث المدعوم حالياً
                 completion = client.chat.completions.create(
-                    model="llama3-70b-8192",
+                    model="llama-3.1-8b-instant",
                     messages=[
                         {"role": "system", "content": "You are a helpful assistant that outputs strictly JSON."},
                         {"role": "user", "content": prompt}
