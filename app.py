@@ -65,9 +65,9 @@ if st.button("🚀 ابدأ توليد السيناريو والرسومات ع�
                 }}
                 """
                 
-                # استخدام النموذج المتاح والمدعوم رسمياً llama-3.1-8b-instant
+                # استخدام النموذج المستقر والمتاح عالمياً llama3-8b-8192
                 completion = client.chat.completions.create(
-                    model="llama-3.1-8b-instant",
+                    model="llama3-8b-8192",
                     messages=[
                         {"role": "system", "content": "You are a JSON generator assistant. Output strictly valid JSON."},
                         {"role": "user", "content": prompt}
